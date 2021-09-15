@@ -1,4 +1,28 @@
 <?php
+//up img
+
+if(isset($_POST['submitP'])){
+    
+   $myfile = $_FILES['Pic']; 
+    $pname = rand(1000,10000)."-".$myfile['name'];
+    $tname = $myfile['tmp_name'];
+    
+    
+    $fileN = "Uimages" ;
+    
+    move_uploaded_file($tname,$fileN.'/'.$pname);
+    $link= mysqli_connect("localhost","root","","gym");
+    $id=$_GET['id'];
+    $sql = "UPDATE GYM SET img='$pname' WHERE GYM.id='$id'";
+    mysqli_query($link,$sql);
+
+    
+}
+
+
+
+
+//edt
 if(isset($_POST['edit'])){
     $link= mysqli_connect("localhost","root","","gym");
     $note= mysqli_real_escape_string($link ,$_POST['note']);
@@ -25,7 +49,7 @@ if(isset($_GET['id'])){
     $user=$all["user"];
     $prix=$all["prix"];
     $tapi=$all["tapi"];
-    
+    $img=$all["img"];
     
 }
 ?>
@@ -91,6 +115,75 @@ if(isset($_GET['id'])){
 .shadow-none {
     box-shadow: none!important;
 }
+          
+          
+          
+          
+          .container2 {
+  position: relative;
+  margin-top: 50px;
+  width: 200px;
+  height: 200px;
+              
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.5s ease;
+    border-radius: 50%;
+}
+
+.container2:hover .overlay {
+  display: block;
+  background: rgba(0, 0, 0, .3);
+}
+
+.imgP {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: 0;
+}
+
+.title {
+  
+}
+
+.container2:hover .button {
+  top: 90px;
+}
+
+.button {
+   
+    
+  position: absolute;
+  width: 200px;
+  left:0;
+  top: 180px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .35s ease;
+    transition: top .5s ease;
+}
+
+.button a {
+  width: 200px;
+  padding: 12px 48px;
+  text-align: center;
+  color: white;
+  border: solid 2px white;
+  z-index: 1;
+}
+
+.container2:hover .button {
+  opacity: 1;
+}
+
         </style>
     </head>
      <body>
@@ -110,8 +203,36 @@ if(isset($_GET['id'])){
 
     </nav>
          
+         <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Profile Picture</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          
+        <form method="post" enctype="multipart/form-data">
+  Select image to upload:
+  <input type="file" name="Pic" id="fileToUpload">
+  
+
+        
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" name="submitP">Save changes</button>
+      </div></form></div>
+    </div>
+  </div>
+</div>
          
          
+         
+         <!-- Container -->
          <div class="container">
     <div class="main-body">
     
@@ -130,7 +251,28 @@ if(isset($_GET['id'])){
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                    
+                      
+                      
+                      <div class="container2">
+                          <?php
+                          if(empty($img)){
+                          echo'<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle imgP" width="150">';
+                          }
+                          else{
+                              $img="Uimages/".$img;
+                              echo'<img src="'.$img.'" alt="Admin" class="rounded-circle imgP" width="150">';
+                          }
+                          ?>
+                       
+                      
+  <div class="overlay"></div>
+  <div class="button"><a href="#" data-toggle="modal" data-target="#exampleModal"> Edit </a></div>
+                      </div>
+                      
+                      
+                      
+                      
                     <div class="mt-3">
                       <h4><?= $user?></h4>
                       <p class="text-secondary mb-1">Start date: <?= $DD?></p>
