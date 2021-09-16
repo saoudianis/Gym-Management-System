@@ -326,13 +326,18 @@ if(isset($_GET['id'])){
                     <div class="col-sm-3">
                         <?php
                         $time = getdate();
-                       $date = $time['mday']."/".$time['mon']."/".$time['year'];
+                       $date = $time['year']."/".$time['mon']."/".$time['mday'];
                           $year=$time['year'];
                           $mon=$time['mon']; //realtime
                           $day=$time['mday'];
                           
-                          //$FDS=list($d, $m, $y) = explode('/', $FD); //final date
-                          if(strtotime($FD)>=strtotime($date)){$status= "His subscription is still";}
+                          
+                          $FDS=list($d, $m, $y) = explode('/', $FD); //final date
+                          $FDD = $y."/".$m."/".$d;//tratib
+                          $FDD = strtotime($FDD);//php time format
+                          $dated = strtotime($date);//php time format
+                         
+                          if($FDD>=$dated){$status= "His subscription is still";}
                           else{
                           $status = "His subscription has expired";
                           }
