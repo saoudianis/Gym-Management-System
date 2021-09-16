@@ -337,12 +337,13 @@ if(isset($_GET['id'])){
                           $FDD = strtotime($FDD);//php time format
                           $dated = strtotime($date);//php time format
                          
-                          if($FDD>=$dated){$status= "His subscription is still";}
+                          if($FDD>=$dated){$status= '<p style="color:green">His subscription is still</p>';}
                           else{
-                          $status = "His subscription has expired";
+                          $status = '<p style="color:red">His subscription has expired</p>';
                           }
                           
                         ?>
+                        
                       <h6 class="mb-0">status</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
