@@ -188,7 +188,7 @@ if(isset($_GET['id'])){
     </head>
      <body>
          <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a href="#" class="navbar-brand"><img src="F+y.png" height="50px" width="50px" style="margin-right: 20px">Force Plus</a>
+        <a href="#" class="navbar-brand"><img src="powert.png" height="50px" width="50px" style="margin-right: 20px">Power Fitness</a>
         <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -399,13 +399,13 @@ if(isset($_GET['id'])){
       for($i=1; $i<= $NLP ;$i++){
                               
              echo '<div class="col-md-2 .col-lg-2 .col-sm-3">
-      <img id="right" src="imgs/right.png" alt="..." class="img-thumbnail" onclick="mypic(this)">
+      <img id="right" src="imgs/nright.png" alt="..." class="img-thumbnail" onclick="mypic(this)">
       </div>';               
       }
       for($i=1; $i<= $NLR ;$i++){
                               
              echo '<div class="col-md-2 .col-lg-2 .col-sm-3">
-      <img id="wrong" src="imgs/wrong.png" alt="..." class="img-thumbnail" onclick="mypic(this);">
+      <img id="wrong" src="imgs/nwrong.png" alt="..." class="img-thumbnail" onclick="mypic(this);">
       </div>';               
       }
       
@@ -445,14 +445,14 @@ if(isset($_GET['id'])){
              
              if(typ.id=="right"){
                  
-                 document.getElementById(pid).src ='imgs/wrong.png';
+                 document.getElementById(pid).src ='imgs/nwrong.png';
                  document.getElementById(pid).id = 'wrong';
                 postwrong();
                  
              }
              if(typ.id=="wrong"){
                  
-                 document.getElementById(pid).src ='imgs/right.png';
+                 document.getElementById(pid).src ='imgs/nright.png';
                  document.getElementById(pid).id = 'right';
                 postright();
                  
@@ -495,7 +495,7 @@ if(isset($_GET['id'])){
                 data: {'user':user,'proc':proc},
                 success:function(response){
                   
-                    
+                    location.reload();
                     
                 }
             });
